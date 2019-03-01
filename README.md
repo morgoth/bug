@@ -1,24 +1,18 @@
-# README
+To demonstrate difference between zeitwerk and classic autoloaders.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To test: `bin/rails s` and visit "http://localhost:3000/local_admin/users"
 
-Things you may want to cover:
+You will see error `undefined local variable or method current_admin for #<LocalAdmin::UsersController>`
+This method is defined in the engine gem "vendor/admin/app/controllers/admin/application_controller.rb"
 
-* Ruby version
+If you switch autoloader to classic, no error is thrown and page loads fine.
 
-* System dependencies
+With zeitwerk, there is a problem with autoloading `ButtonHelpers` module inside `ApplicationHelper` in
+"vendor/admin/app/helpers/admin/application_helper.rb" which you can observe by:
+```
+bin/rails r 'puts Admin::ApplicationController'
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+uninitialized constant Admin::ApplicationHelper::ButtonHelpers
+Did you mean?  Admin::ButtonHelpers
+```
+which somehow is swallowed when running rails server...
