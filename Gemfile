@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.1'
+ruby '2.6.3'
 
 gem 'admin', path: './vendor/admin'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.0.beta2'
+# gem 'rails', '~> 6.0.0.rc3'
+gem 'rails', github: 'rails/rails', branch: '6-0-stable'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3', '>= 1.3.6'
 # Use Puma as the app server
